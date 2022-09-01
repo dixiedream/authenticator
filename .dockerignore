@@ -1,0 +1,6 @@
+pkg
+docker-compose.yml
+Dockerfile
+default.env
+app
+.git

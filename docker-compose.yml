@@ -1,0 +1,51 @@
+version: "2"
+
+services:
+  backend:
+    build:
+      context: .
+      target: dev
+    volumes:
+      - ./:/app
+    environment:
+      - DB_HOST
+      - DB_USER
+      - DB_PASSWORD
+      - DB_DATABASE
+      - DB_PORT
+      - JWT_ACCESS_SECRET
+      - JWT_REFRESH_SECRET
+    ports:
+      - 3000:3000
+    # depends_on:
+    #   db:
+    #     condition: service_healthy
+
+#   db:
+#     image: mariadb
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=admin
+#       - MYSQL_DATABASE=${DB_DATABASE}
+#       - MYSQL_USER=${DB_USER}
+#       - MYSQL_PASSWORD=${DB_PASSWORD}
+#       - TZ=Europe/Rome
+#     volumes:
+#       - dbdata:/var/lib/mysql
+#     healthcheck:
+#       test: "mysqladmin -uroot -p${MYSQL_ROOT_PASSWORD:-admin} ping -h localhost"
+#       timeout: 20s
+#       retries: 15
+#
+#   phpmyadmin:
+#     image: phpmyadmin
+#     ports:
+#       - 8080:80
+#     environment:
+#       - PMA_HOST=db
+#       - MYSQL_ROOT_PASSWORD=admin
+#     depends_on:
+#       db:
+#         condition: service_started
+#
+# volumes:
+#   dbdata:
